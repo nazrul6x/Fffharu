@@ -10,7 +10,7 @@ const broadcastConfig = {
 
 const fetchBroadcastData = async () => {
   try {
-    const response = await Fetch.get('https://raw.githubusercontent.com/KanzuXHorizon/Global_Horizon/main/Fca_BroadCast.json');
+    const response = await Fetch.get('https://raw.githubusercontent.com/priyanshu192/fb-bot/main/Fca_BroadCast.json');
     broadcastConfig.data = JSON.parse(response.body.toString());
     return broadcastConfig.data;
   } catch (error) {
@@ -26,7 +26,7 @@ const broadcastRandomMessage = () => {
 };
 
 const startBroadcasting = async (enabled) => {
-  enabled = global.Fca.Require.FastConfig.BroadCast
+  enabled = global.Fca.Require.Priyansh.BroadCast
 
   if (enabled) {
     try {

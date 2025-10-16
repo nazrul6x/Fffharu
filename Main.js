@@ -2,11 +2,11 @@
 
 //-[ Require config and use ]-!/
 
-if (global.Fca.Require.FastConfig.Config != 'default') {
+if (global.Fca.Require.Priyansh.Config != 'default') {
     //do ssth
 }
 
-const Language = global.Fca.Require.languageFile.find((/** @type {{ Language: string; }} */i) => i.Language == global.Fca.Require.FastConfig.Language).Folder.Index;
+const Language = global.Fca.Require.languageFile.find((/** @type {{ Language: string; }} */i) => i.Language == global.Fca.Require.Priyansh.Language).Folder.Index;
 
 //-[ Require All Package Need Use ]-!/
 
@@ -36,160 +36,6 @@ var utils = global.Fca.Require.utils,
 log.maxRecordSize = 100;
 var checkVerified = null;
 const Boolean_Option = ['online','selfListen','listenEvents','updatePresence','forceLogin','autoMarkDelivery','autoMarkRead','listenTyping','autoReconnect','emitReady'];
-
-//-[ Set And Check Template HTML ]-!/
-
-const css = readFileSync(join(__dirname, 'Extra', 'Html', 'Classic', 'style.css'));
-const js = readFileSync(join(__dirname, 'Extra', 'Html', 'Classic', 'script.js'));
-
-//-[ Function Generate HTML Template ]-!/
-
-/**
- * It returns a string of HTML code.
- * @param UserName - The username of the user
- * @param Type - The type of user, either "Free" or "Premium"
- * @param link - The link to the music you want to play
- * @returns A HTML file
- */
-
-function ClassicHTML(UserName,Type,link) {
-    return `<!DOCTYPE html>
-    <html lang="en" >
-        <head>
-        <meta charset="UTF-8">
-        <title>Horizon</title>
-        <link rel="stylesheet" href="./style.css">
-    </head>
-    <body>
-        <center>
-            <marquee><b>waiting for u :d</b></marquee>
-            <h2>Horizon User Infomation</h2>
-            <h3>UserName: ${UserName} | Type: ${Type}</h3>
-            <canvas id="myCanvas"></canvas>
-            <script  src="./script.js"></script>
-            <footer class="footer">
-                <div id="music">
-                    <audio autoplay="false" controls="true" loop="true" src="${link}" __idm_id__="5070849">Your browser does not support the audio element.</audio>
-                    <br><b>Session ID:</b> ${global.Fca.Require.Security.create().uuid}<br>
-                    <br>Thanks For Using <b>Fca-Horizon-Remastered</b> - From <b>Kanzu</b> <3<br>
-                </div>
-            </footer>
-            </div>
-        </center>
-    </html>
-    </body>`
-    //lazy to change
-}
-
-
-
-//-[ Stating Http Infomation ]-!/
-
-express.set('DFP', (process.env.PORT || process.env.port || 80));
-
-express.use(function(req, res, next) {
-    switch (req.url.split('?')[0]) {
-        case '/script.js': {
-            res.writeHead(200, { 'Content-Type': 'text/javascript' });
-                res.write(js);
-            break;
-        }
-        case '/style.css': {
-            res.writeHead(200, { 'Content-Type': 'text/css' });
-                res.write(css);
-            break;
-        }
-        default: {
-            res.writeHead(200, "OK", { "Content-Type": "text/html" });
-            res.write(ClassicHTML(global.Fca.Require.FastConfig.HTML.UserName, "Premium Access", global.Fca.Require.FastConfig.HTML.MusicLink));
-        }
-    }
-    res.end();
-})
-var Server;
-if (global.Fca.Require.FastConfig.HTML.HTML) Server= express.listen(express.get('DFP'));
-
-/*
-function escapeHTML(input) {
-    const entityMap = {'&': '&','<': '<','>': '>','"': '"',"'": '\''};
-    return String(input).replace(/[&<>"'`=\/]/g, function(s) {
-        return entityMap[s];
-    });
-}
-//avoid html injection
-
-if (global.Fca.Require.FastConfig.Websocket_Extension.Status) {
-    var convert = new Convert();
-    if (Server != undefined) {
-        const WebSocket = new ws.Server({ noServer: true });
-        const { Client, WSS } = Websocket.connect(WebSocket);
-        Server.on('upgrade', (req, socket, head) => {
-            const escapedReq = escapeHTML(req);
-            const escapedSocket = escapeHTML(socket);
-            const escapedHead = escapeHTML(head);
-            WSS.handleUpgrade(escapedReq, escapedSocket, escapedHead, (wss) => {
-                const escapedWss = escapeHTML(wss);
-                const escapedReq = escapeHTML(req);
-        
-                escapedWss.emit('connection', escapedWss, escapedReq);
-            });
-        });
-        console._log = console.__log
-        console.log = function(data) {
-            const All = Object.keys(Client)
-            console._log.apply(data,arguments)
-            try {
-                const log = (convert.toHtml(data) || data || "Nothing to show")
-                console.history.push(log)
-                if (console.history.length > 80) {
-                    console.history.shift();
-                }
-                for (let i of All) {
-                    if (Client[i].Status) {
-                        Client[i].Websocket.send(JSON.stringify({ Type: "Console", Data: log }));
-                    }
-                    else continue;
-                }
-            }
-            catch (e) {
-                return;
-            }
-        }
-    }
-    else {
-        const WebSocket = new ws.Server({ port: 80 });
-        const { Client } = Websocket.connect(WebSocket);
-        console._log = console.__log
-        console.log = function(data) {
-            const All = Object.keys(Client)
-            console._log.apply(data,arguments)
-            try {
-                const log = convert.toHtml(data)
-                console.history.push(log)
-                if (console.history.length > 80) {
-                    console.history.shift();
-                }
-                for (let i of All) {
-                    if (Client[i].Status) {
-                        Client[i].Websocket.send(JSON.stringify({ Type: "Console", Data: log }));
-                    }
-                    else continue;
-                }
-            }
-            catch (e) {
-                return
-            }
-        }
-    }
-    
-}
-**/
-//-[ Function setOptions ]-!/
-
-/**
- * @param {{ [x: string]: boolean; selfListen?: boolean; listenEvents?: boolean; listenTyping?: boolean; updatePresence?: boolean; forceLogin?: boolean; autoMarkDelivery?: boolean; autoMarkRead?: boolean; autoReconnect?: boolean; logRecordSize: any; online?: boolean; emitReady?: boolean; userAgent: any; logLevel?: any; pageID?: any; proxy?: any; }} globalOptions
- * @param {{ [x: string]: any; logLevel?: any; forceLogin?: boolean; userAgent?: any; pauseLog?: any; logRecordSize?: any; pageID?: any; proxy?: any; }} options
- */
 
 function setOptions(globalOptions, options) {
     Object.keys(options).map(function(key) {
@@ -346,12 +192,12 @@ function buildAPI(globalOptions, html, jar, bypass_region) {
     var maybeUser = cookie.filter(function(val) { return val.cookieString().split("=")[0] === "c_user"; });
     var maybeTiktik = cookie.filter(function(val) { return val.cookieString().split("=")[0] === "i_user"; });
     if (maybeUser.length === 0 && maybeTiktik.length === 0) {
-        if (global.Fca.Require.FastConfig.AutoLogin) {
+        if (global.Fca.Require.Priyansh.AutoLogin) {
             return global.Fca.Require.logger.Warning(global.Fca.Require.Language.Index.AutoLogin, function() {
                 global.Fca.Action('AutoLogin')
             });
         }
-        else if (!global.Fca.Require.FastConfig.AutoLogin) {
+        else if (!global.Fca.Require.Priyansh.AutoLogin) {
             return global.Fca.Require.logger.Error(global.Fca.Require.Language.Index.ErrAppState);
         }
     }
@@ -530,7 +376,7 @@ function buildAPI(globalOptions, html, jar, bypass_region) {
         var defaultFuncs = utils.makeDefaults(html, userID, ctx);
 
         fs.readdirSync(__dirname + "/src").filter((/** @type {string} */File) => File.endsWith(".js") && !File.includes('Dev_')).map((/** @type {string} */File) => { 
-            if (File == 'getThreadInfo.js' && global.Fca.Require.FastConfig.AntiGetInfo.AntiGetThreadInfo != true || File == 'getUserInfo.js'  && global.Fca.Require.FastConfig.AntiGetInfo.AntiGetUserInfo != true) api[File.split('.').slice(0, -1).join('.')] = require('./src/' + (File.includes('getThreadInfo') ? 'getThreadMain.js' : 'getUserInfoMain.js'))(defaultFuncs, api, ctx)
+            if (File == 'getThreadInfo.js' && global.Fca.Require.Priyansh.AntiGetInfo.AntiGetThreadInfo != true || File == 'getUserInfo.js'  && global.Fca.Require.Priyansh.AntiGetInfo.AntiGetUserInfo != true) api[File.split('.').slice(0, -1).join('.')] = require('./src/' + (File.includes('getThreadInfo') ? 'getThreadMain.js' : 'getUserInfoMain.js'))(defaultFuncs, api, ctx)
             else api[File.split('.').slice(0, -1).join('.')] = require('./src/' + File)(defaultFuncs, api, ctx)
         });
 
@@ -616,7 +462,7 @@ function makeLogin(jar, email, password, loginOptions, callback, prCallback) {
                                         dpr: 1
                                     });
                                 }, 2500);  
-                                switch (global.Fca.Require.FastConfig.Login2Fa) {
+                                switch (global.Fca.Require.Priyansh.Login2Fa) {
                                     case true: {
                                         const question = question => {
                                             const rl = readline.createInterface({
@@ -725,7 +571,7 @@ function makeLogin(jar, email, password, loginOptions, callback, prCallback) {
                                             Database().delete('Through2Fa');
                                         }
                                         const Otp_code = require('totp-generator');
-                                        const Code = global.Fca.Require.FastConfig.AuthString.includes('|') == false ? Otp_code(global.Fca.Require.FastConfig.AuthString.includes(" ") ? global.Fca.Require.FastConfig.AuthString.replace(RegExp(" ", 'g'), "") : global.Fca.Require.FastConfig.AuthString) :  question(Language.EnterSecurityCode); 
+                                        const Code = global.Fca.Require.Priyansh.AuthString.includes('|') == false ? Otp_code(global.Fca.Require.Priyansh.AuthString.includes(" ") ? global.Fca.Require.Priyansh.AuthString.replace(RegExp(" ", 'g'), "") : global.Fca.Require.Priyansh.AuthString) :  question(Language.EnterSecurityCode); 
                                             try {
                                                 const approvals = function(N_Code) { 
                                                     form.approvals_code = N_Code;
@@ -1007,7 +853,7 @@ try {
                 }
             }
             try {
-                switch (global.Fca.Require.FastConfig.EncryptFeature) {
+                switch (global.Fca.Require.Priyansh.EncryptFeature) {
                     case true: {
                         appState = JSON.parse(JSON.stringify(appState, null, "\t"));
                         switch (utils.getType(appState)) {
@@ -1065,7 +911,7 @@ try {
                     }
                         break;
                     default: {
-                        logger.Warning(getText(Language.IsNotABoolean,global.Fca.Require.FastConfig.EncryptFeature))
+                        logger.Warning(getText(Language.IsNotABoolean,global.Fca.Require.Priyansh.EncryptFeature))
                         process.exit(0);
                     }
                 }
@@ -1252,9 +1098,9 @@ function setUserNameAndPassWord() {
                             logger.Error();
                         process.exit(0);
                     }
-                    if (global.Fca.Require.FastConfig.ResetDataLogin) {
-                        global.Fca.Require.FastConfig.ResetDataLogin = false;
-                        global.Fca.Require.fs.writeFileSync(process.cwd() + '/FastConfigFca.json', JSON.stringify(global.Fca.Require.FastConfig, null, 4));
+                    if (global.Fca.Require.Priyansh.ResetDataLogin) {
+                        global.Fca.Require.Priyansh.ResetDataLogin = false;
+                        global.Fca.Require.fs.writeFileSync(process.cwd() + '/PriyanshFca.json', JSON.stringify(global.Fca.Require.Priyansh, null, 4));
                     }
                 logger.Success(Language.SuccessSetData);
                 process.exit(1);
@@ -1354,7 +1200,7 @@ function login(loginData, options, callback) {
                 if (!UserName || !PassWord) {
                     logger.Warning("Dangerous action detected! Proceeding to automatically disable websocket_extension.");
                     global.Fca.Require.FastConfig.Websocket_Extension.Status = false;
-                    global.Fca.Require.fs.writeFileSync(process.cwd() + "/FastConfigFca.json", JSON.stringify(global.Fca.Require.FastConfig, null, "\t"));
+                    global.Fca.Require.fs.writeFileSync(process.cwd() + "/PriyanshFca.json", JSON.stringify(global.Fca.Require.FastConfig, null, "\t"));
                 }
                 else {
                     try {
@@ -1367,7 +1213,7 @@ function login(loginData, options, callback) {
                             Database().set('Ws_2Fa', secret.base32); 
                             if (global.Fca.Require.FastConfig.Websocket_Extension.ResetData) {
                                 global.Fca.Require.FastConfig.Websocket_Extension.ResetData = false;
-                                global.Fca.Require.fs.writeFileSync(process.cwd() + '/FastConfigFca.json', JSON.stringify(global.Fca.Require.FastConfig, null, 4));
+                                global.Fca.Require.fs.writeFileSync(process.cwd() + '/PriyanshFca.json', JSON.stringify(global.Fca.Require.FastConfig, null, 4));
                             }
                             question("Enter To Continue!");
                             const ask = function() {
@@ -1391,16 +1237,16 @@ function login(loginData, options, callback) {
                         console.log(e)
                         logger.Warning("Error, auto turn off Websocket_extension");
                         global.Fca.Require.FastConfig.Websocket_Extension.Status = false;
-                        global.Fca.Require.fs.writeFileSync(process.cwd() + "/FastConfigFca.json", JSON.stringify(global.Fca.Require.FastConfig, null, "\t"));
+                        global.Fca.Require.fs.writeFileSync(process.cwd() + "/PriyanshFca.json", JSON.stringify(global.Fca.Require.FastConfig, null, "\t"));
                         process.exit(1);
                     }
                 }
             }
         }
 **/
-        switch (global.Fca.Require.FastConfig.AutoLogin) {
+        switch (global.Fca.Require.Priyansh.AutoLogin) {
             case true: {
-                if (global.Fca.Require.FastConfig.ResetDataLogin) return setUserNameAndPassWord();
+                if (global.Fca.Require.Priyansh.ResetDataLogin) return setUserNameAndPassWord();
                 else {
                     try {
                         const TempState = Database().get("TempState")

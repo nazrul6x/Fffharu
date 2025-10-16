@@ -1,6 +1,6 @@
 # Security Policy
 
-+ if have any Vulnerability finded contact: Author(KanzuWakazaki.Main@proton.me) or (Facebook.com/Lazic.Kanzu). Thanks!
++ if have any Vulnerability finded contact: Author(Priyansh) or (Facebook.com/Priyanshu.Rajput.Official). Thanks!
 
 ## Supported Versions
 
@@ -9,10 +9,9 @@ currently being supported with security updates.
 
 | Version | Supported          |
 | ------- | ------------------ |
-| StableVersion | :white_check_mark: |
-| AutoUpdate | :white_check_mark:|
-| Modified | :x:
+| Main Version With Autoupdate | :white_check_mark: |
+| Old Version | :x:|
 
 ## Reporting a Vulnerability
 
-Contact Author or create pull!
+Contact Author
