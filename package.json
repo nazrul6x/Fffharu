@@ -1,6 +1,6 @@
 {
   "name": "fca-nazrul-remastered",
-  "version": "1.5.3",
+  "version": "1.5.4",
   "description": "Facebook-chat-api protect and deploy by Kanzu and HZI Team",
   "main": "index.js",
   "scripts": {
@@ -52,7 +52,7 @@
     "ws": "^8.13.0"
   },
   "engines": {
-    "node": ">=14.x"
+    "node": ">=20.x"
   },
   "devDependencies": {
     "eslint": "^8.40.0",
